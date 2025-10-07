@@ -1,8 +1,12 @@
 package org.practicoJPA.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Estudiante {
@@ -14,13 +18,15 @@ public class Estudiante {
 	@Column(nullable=false)
 	private String apellido;
 	@Column(nullable=false)
-	private int Edad;
+	private int edad;
 	@Column(nullable=false)
 	private String genero;
 	@Column(nullable=false)
-	private String Ciudad;
+	private String ciudad;
 	@Column(nullable=false)
-	private Long LU;
+	private Long lu;
+	@OneToMany(mappedBy ="estudiante")
+	private List<EstudianteCarrera> carreras = new ArrayList<>();
 	
 	public Estudiante() {
 		
@@ -33,10 +39,10 @@ public class Estudiante {
 		DNI = dNI;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.Edad = edad;
+		this.edad = edad;
 		this.genero = genero;
-		this.Ciudad = ciudad;
-		this.LU = lU;
+		this.ciudad = ciudad;
+		this.lu = lU;
 	}
 
 
@@ -58,11 +64,11 @@ public class Estudiante {
 	}
 
 	public int getEdad() {
-		return Edad;
+		return edad;
 	}
 
 	public void setEdad(int edad) {
-		Edad = edad;
+		this.edad = edad;
 	}
 
 	public String getGenero() {
@@ -74,29 +80,45 @@ public class Estudiante {
 	}
 
 	public String getCiudad() {
-		return Ciudad;
+		return ciudad;
 	}
 
 	public void setCiudad(String ciudad) {
-		Ciudad = ciudad;
+		this.ciudad = ciudad;
 	}
 
 	public Long getLU() {
-		return LU;
+		return lu;
 	}
 
 	public void setLU(Long lU) {
-		LU = lU;
+		this.lu = lU;
 	}
 
 	public Long getDNI() {
 		return DNI;
 	}
 
+
+
+	public List<EstudianteCarrera> getCarreras() {
+		return carreras;
+	}
+
+
+
+	public void setCarreras(List<EstudianteCarrera> carreras) {
+		this.carreras = carreras;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Estudiante [DNI=" + DNI + ", nombre=" + nombre + ", apellido=" + apellido + ", Edad=" + Edad
-				+ ", genero=" + genero + ", Ciudad=" + Ciudad + ", LU=" + LU + "]";
+		return "Estudiante [DNI=" + DNI + ", nombre=" + nombre + ", apellido=" + apellido + ", Edad=" + edad
+				+ ", genero=" + genero + ", Ciudad=" + ciudad + ", LU=" + lu + ", carreras=" + carreras + "]";
 	}
+
+	
 
 }

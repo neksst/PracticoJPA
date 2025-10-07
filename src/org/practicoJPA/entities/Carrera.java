@@ -1,8 +1,11 @@
 package org.practicoJPA.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Carrera {
@@ -11,7 +14,12 @@ public class Carrera {
 	@Column(name="ID")
 	private Long id;
 	@Column(nullable = false)
-	private String Carrera;
+	private String NombreCarrera;
+	@Column(nullable = false)
+	private int duracion;
+	@OneToMany(mappedBy = "carrera")
+	private List<EstudianteCarrera> carreras;
+	
 
 	public Carrera() {
 		super();
@@ -20,29 +28,67 @@ public class Carrera {
 
 	
 	
-	public Carrera(Long id, String carrera) {
+	public Carrera(Long id, String NombreCarrera,int duracion) {
 		super();
 		this.id = id;
-		this.Carrera = carrera;
+		this.NombreCarrera = NombreCarrera;
+		this.duracion = duracion;
 	}
 
 
 
-	public String getCarrera() {
-		return Carrera;
+	public String getNombreCarrera() {
+		return NombreCarrera;
 	}
 
-	public void setCarrera(String carrera) {
-		Carrera = carrera;
+
+
+	public void setNombreCarrera(String nombreCarrera) {
+		NombreCarrera = nombreCarrera;
 	}
+
+
+
+	public List<EstudianteCarrera> getCarreras() {
+		return carreras;
+	}
+
+
+
+	public void setCarreras(List<EstudianteCarrera> carreras) {
+		this.carreras = carreras;
+	}
+
+
 
 	public Long getId() {
 		return id;
 	}
 
-	@Override
-	public String toString() {
-		return "Carrera [id=" + id + ", Carrera=" + Carrera + "]";
+
+
+	public int getDuracion() {
+		return duracion;
 	}
 
+
+
+	public void setDuracion(int duracion) {
+		this.duracion = duracion;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Carrera [id=" + id + ", NombreCarrera=" + NombreCarrera + ", duracion=" + duracion + ", carreras="
+				+ carreras + "]";
+	}
+
+
+
+	
+
+
+	
 }
